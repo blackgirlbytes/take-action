@@ -26,7 +26,7 @@ runs:
         if [[ "$IS_USER_ASSIGNED" == false ]]; then
           echo $IS_USER_ASSIGNED
         fi
-        if [[ "$IS_USER_ASSIGNED" == true  ]]; then
+        if [[ "$IS_USER_ASSIGNED" ]]; then
             echo $ISSUE_NUMBER
         fi
       shell: bash
