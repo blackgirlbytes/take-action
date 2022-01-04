@@ -23,7 +23,8 @@ runs:
         ISSUE_JSON="$(jq '.issue' $GITHUB_EVENT_PATH)"
    
         if [[ $BODY == *".take"* ]]; then
-          echo "HEY RIZEL WROTE THIS $ISSUE_JSON | jq '.assignee | length == 0'""
+          echo "I am printing a boolean below"
+          echo $ISSUE_JSON | jq '.assignees | length == 0'
           echo "Assigning issue $ISSUE_NUMBER to $LOGIN"
           echo "Using the link: https://api.github.com/repos/$REPO/issues/$ISSUE_NUMBER/assignees"
           curl -H "Authorization: token $GITHUB_TOKEN" -d '{"assignees":["'"$LOGIN"'"]}' https://api.github.com/repos/$REPO/issues/$ISSUE_NUMBER/assignees
