@@ -24,7 +24,7 @@ runs:
         ISSUE_CURRENTLY_ASSIGNED=`echo $ISSUE_JSON | jq '.assignees | length == 0'`
 
         if [[ $BODY == *".take"* ]]; then
-          if [[ "$ISSUE_CURRENTLY_ASSIGNED" ]]; then
+          if [[ "$ISSUE_CURRENTLY_ASSIGNED" == true ]]; then
             echo "$ISSUE_CURRENTLY_ASSIGNED"
             echo "Assigning issue $ISSUE_NUMBER to $LOGIN"
             echo "Using the link: https://api.github.com/repos/$REPO/issues/$ISSUE_NUMBER/assignees"
@@ -33,6 +33,8 @@ runs:
               jq -n -r --arg body "$INPUT_MESSAGE" '{body: $body}' > payload.json
               curl -X POST -H "Authorization: token $GITHUB_TOKEN" --data @payload.json https://api.github.com/repos/$REPO/issues/$ISSUE_NUMBER/comments
             fi
+          else
+            echo "This issue is currently assigned to a different user"
           fi
         fi
       shell: bash
