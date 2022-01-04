@@ -25,9 +25,9 @@ runs:
 
 
         if [[ "$ISSUE_CURRENTLY_ASSIGNED"]]; then
-            echo "$ISSUE_CURRENTLY_ASSIGNED"
-            echo "Assigning issue $ISSUE_NUMBER to $LOGIN"
-            echo "Using the link: https://api.github.com/repos/$REPO/issues/$ISSUE_NUMBER/assignees"
+          echo "$ISSUE_CURRENTLY_ASSIGNED"
+          echo "Assigning issue $ISSUE_NUMBER to $LOGIN"
+          echo "Using the link: https://api.github.com/repos/$REPO/issues/$ISSUE_NUMBER/assignees"
         fi
       shell: bash
       env:
