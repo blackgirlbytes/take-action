@@ -21,7 +21,7 @@ runs:
         LOGIN="$(jq '.comment.user.login' $GITHUB_EVENT_PATH | tr -d \")"
         REPO="$(jq '.repository.full_name' $GITHUB_EVENT_PATH | tr -d \")"
         ISSUE_JSON="$(jq '.issue' $GITHUB_EVENT_PATH)"
-        USER_ASSIGNED="($ISSUE_JSON | jq '.assignees | length == 0')"
+        echo $ISSUE_JSON | jq '.assignees | length == 0'
         
         if [[ $BODY == *".take"* ]]; then
           echo "$USER_ASSIGNED"
