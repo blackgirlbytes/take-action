@@ -10,6 +10,10 @@ inputs:
     description: 'Message to prospective contributor'
     required: false
     default: ''
+  testMessage:
+    description: 'Message to second contributor'
+    required: false
+    default: 'This is already assigned to a user'
 
 runs:
   using: "composite"
@@ -36,10 +40,11 @@ runs:
             fi
           else
             echo "This issue is currently assigned to a different user"
-            jq -n -r --arg body "This issue is currently assigned to a different user" '{body: $body}' > payload.json
+            jq -n -r --arg body "$TEST_MESSAGE" '{body: $body}' > payload.json
             curl -X POST -H "Authorization: token $GITHUB_TOKEN" --data @payload.json https://api.github.com/repos/$REPO/issues/$ISSUE_NUMBER/comments
           fi
         fi
       shell: bash
       env:
         INPUT_MESSAGE: "${{ inputs.message }}"
+        TEST_MESSAGE: "${{ inputs.testMessage }}"
