@@ -13,7 +13,7 @@ inputs:
   testMessage:
     description: 'Message to second contributor'
     required: false
-    default: 'This is already assigned to a user!!!!!'
+    default: ''
 
 runs:
   using: "composite"
